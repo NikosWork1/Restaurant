@@ -1,0 +1,243 @@
+/* Auth styles for Restaurant Management System */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    padding: 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.auth-header {
+    padding: 25px 30px;
+    text-align: center;
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #edf2f9;
+}
+
+.auth-header .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.auth-header .logo h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.auth-header .logo p {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+}
+
+.auth-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--dark-text);
+}
+
+.auth-header p {
+    color: var(--grey-color);
+}
+
+.auth-form {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.input-icon-wrapper {
+    position: relative;
+}
+
+.input-icon-wrapper i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grey-color);
+}
+
+.input-icon-wrapper input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.input-icon-wrapper input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.15);
+    outline: none;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 8px;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+.auth-footer {
+    padding: 20px 30px;
+    text-align: center;
+    background-color: #f8f9fc;
+    border-top: 1px solid #edf2f9;
+}
+
+.auth-footer p {
+    margin-bottom: 15px;
+    color: var(--grey-color);
+}
+
+.auth-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.back-home {
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+.back-home i {
+    margin-right: 5px;
+}
+
+/* User role selection */
+.user-roles {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.user-roles p {
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.role-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.role-btn {
+    flex: 1;
+    background-color: #f8f9fc;
+    border: 1px solid #edf2f9;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.role-btn i {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--grey-color);
+}
+
+.role-btn span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.role-btn:hover {
+    background-color: #edf2f9;
+}
+
+.role-btn.active {
+    background-color: rgba(78, 115, 223, 0.1);
+    border-color: var(--primary-color);
+}
+
+.role-btn.active i {
+    color: var(--primary-color);
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .auth-form {
+        padding: 20px;
+    }
+    
+    .auth-header,
+    .auth-footer {
+        padding: 20px;
+    }
+    
+    .role-buttons {
+        flex-direction: column;
+    }
+    
+    .role-btn {
+        padding: 12px;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .role-btn i {
+        margin-bottom: 0;
+        margin-right: 10px;
+    }
+}
