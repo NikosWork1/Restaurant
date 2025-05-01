@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Restaurant Management System</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <h1>RMS</h1>
+                <p>Restaurant Management</p>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <img src="../../assets/images/user-avatar.jpg" alt="User Avatar" class="placeholder-img">
+            </div>
+            <div class="user-info">
+                <h3 id="sidebarUserName">Loading...</h3>
+                <p>Customer</p>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="menu.html">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reservation.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Reservations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="orders.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>My Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profile.html">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-divider"></li>
+                <li>
+                    <a href="#" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for dishes, orders...">
+            </div>
+            
+            <div class="navbar-right">
+                <div class="notification-bell">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <a href="#">Mark all as read</a>
+                        </div>
+                        <div class="notification-body">
+                            <div class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Your reservation for tonight has been confirmed.</p>
+                                    <span class="notification-time">10 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Your order #1234 is ready for pickup.</p>
+                                    <span class="notification-time">30 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-percent"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Special discount: 20% off on your next visit!</p>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#">View all notifications</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                
+                <div class="user-dropdown">
+                    <div class="user-avatar-small">
+                        <img src="../../assets/images/user-avatar.jpg" alt="User Avatar" class="placeholder-img">
+                    </div>
+                    <span class="user-name" id="topNavUserName">Loading...</span>
+                    <i class="fas fa-chevron-down"></i>
+                    
+                    <div class="user-dropdown-menu">
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help Center</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="logout-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Page Content -->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p>Welcome back, <span id="welcomeUserName">there</span>!</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background-color: rgba(78, 115, 223, 0.1);">
+                        <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <h3 id="upcomingReservationsCount">...</h3>
+                        <p>Upcoming Reservations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background-color: rgba(28, 200, 138, 0.1);">
+                        <i class="fas fa-utensils" style="color: var(--secondary-color);"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <h3 id="ordersPlacedCount">...</h3>
+                        <p>Orders Placed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background-color: rgba(246, 194, 62, 0.1);">
+                        <i class="fas fa-star" style="color: var(--warning-color);"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <h3>4.8</h3>
+                        <p>Average Rating</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background-color: rgba(54, 185, 204, 0.1);">
+                        <i class="fas fa-tag" style="color: var(--info-color);"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <h3>3</h3>
+                        <p>Available Offers</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-cards">
+                    <a href="reservation.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-calendar-plus"></i>
+                        </div>
+                        <span>New Reservation</span>
+                    </a>
+                    <a href="menu.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <span>Order Food</span>
+                    </a>
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                        <span>Special Requests</span>
+                    </a>
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <span>Contact Us</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Upcoming Reservations -->
+            <div class="content-card upcoming-reservations">
+                <div class="card-header">
+                    <h2>Upcoming Reservations</h2>
+                    <a href="reservation.html" class="btn btn-outline">View All</a>
+                </div>
+                <div class="card-body">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Reservation ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Table</th>
+                                <th>Guests</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="upcomingReservationsTable">
+                            <tr>
+                                <td colspan="7" class="text-center">Loading reservations...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Recent Orders -->
+            <div class="content-card recent-orders">
+                <div class="card-header">
+                    <h2>Recent Orders</h2>
+                    <a href="orders.html" class="btn btn-outline">View All</a>
+                </div>
+                <div class="card-body">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentOrdersTable">
+                            <tr>
+                                <td colspan="6" class="text-center">Loading orders...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Special Offers -->
+            <div class="content-card special-offers">
+                <div class="card-header">
+                    <h2>Special Offers</h2>
+                    <a href="#" class="btn btn-outline">View All</a>
+                </div>
+                <div class="card-body">
+                    <div class="offers-grid">
+                        <div class="offer-card">
+                            <div class="offer-image">
+                                <img src="../../assets/images/offer1.jpg" alt="Special Offer" class="placeholder-img">
+                                <div class="offer-badge">20% OFF</div>
+                            </div>
+                            <div class="offer-content">
+                                <h3>Weekend Special</h3>
+                                <p>Enjoy 20% off on all main courses every weekend</p>
+                                <p class="offer-validity">Valid till: May 31, 2025</p>
+                                <a href="#" class="btn btn-primary">Use Now</a>
+                            </div>
+                        </div>
+                        <div class="offer-card">
+                            <div class="offer-image">
+                                <img src="../../assets/images/offer2.jpg" alt="Special Offer" class="placeholder-img">
+                                <div class="offer-badge">FREE</div>
+                            </div>
+                            <div class="offer-content">
+                                <h3>Birthday Dessert</h3>
+                                <p>Get a free dessert on your birthday celebration</p>
+                                <p class="offer-validity">Valid all year</p>
+                                <a href="#" class="btn btn-primary">Use Now</a>
+                            </div>
+                        </div>
+                        <div class="offer-card">
+                            <div class="offer-image">
+                                <img src="../../assets/images/offer3.jpg" alt="Special Offer" class="placeholder-img">
+                                <div class="offer-badge">BOGO</div>
+                            </div>
+                            <div class="offer-content">
+                                <h3>Happy Hour</h3>
+                                <p>Buy one get one free on selected beverages</p>
+                                <p class="offer-validity">Mon-Thu, 4-6 PM</p>
+                                <a href="#" class="btn btn-primary">Use Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Restaurant Management System. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="../../assets/js/api-service.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+    <script>
+        // Dashboard page specific script
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Get current user from localStorage
+                const user = ApiService.getCurrentUser();
+                
+                if (user) {
+                    // Update username in the UI
+                    document.getElementById('sidebarUserName').textContent = user.name;
+                    document.getElementById('topNavUserName').textContent = user.name;
+                    document.getElementById('welcomeUserName').textContent = user.name.split(' ')[0];
+                }
+                
+                // Load upcoming reservations
+                await loadUpcomingReservations();
+                
+                // Load recent orders
+                await loadRecentOrders();
+                
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+                showToast('Error loading dashboard data. Please try again.');
+            }
+            
+            // Handle logout links
+            document.querySelectorAll('.logout-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    ApiService.logout();
+                });
+            });
+        });
+        
+        // Load upcoming reservations
+        async function loadUpcomingReservations() {
+            try {
+                // Get upcoming reservations from API
+                const reservations = await ApiService.getReservations({
+                    status: 'confirmed,pending',
+                    // Only get future reservations
+                    date: new Date().toISOString().split('T')[0]
+                });
+                
+                // Update count
+                document.getElementById('upcomingReservationsCount').textContent = reservations.length;
+                
+                // Update table
+                const tableBody = document.getElementById('upcomingReservationsTable');
+                
+                if (reservations.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No upcoming reservations</td></tr>';
+                    return;
+                }
+                
+                // Sort by date (soonest first)
+                reservations.sort((a, b) => new Date(a.reservation_date + ' ' + a.reservation_time) - 
+                                          new Date(b.reservation_date + ' ' + b.reservation_time));
+                
+                // Take only the first 3
+                const recentReservations = reservations.slice(0, 3);
+                
+                // Generate table rows
+                tableBody.innerHTML = recentReservations.map(reservation => {
+                    const date = new Date(reservation.reservation_date);
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    
+                    return `
+                        <tr>
+                            <td>#${reservation.id}</td>
+                            <td>${formattedDate}</td>
+                            <td>${reservation.reservation_time}</td>
+                            <td>${reservation.table.table_number} (${reservation.table.section})</td>
+                            <td>${reservation.guests}</td>
+                            <td><span class="status-badge ${reservation.status}">${reservation.status}</span></td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn-icon view-reservation" data-id="${reservation.id}" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon edit-reservation" data-id="${reservation.id}" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon cancel-reservation" data-id="${reservation.id}" title="Cancel">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // Add event listeners to the buttons
+                document.querySelectorAll('.view-reservation').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        window.location.href = `reservation.html?id=${id}`;
+                    });
+                });
+                
+                document.querySelectorAll('.edit-reservation').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        window.location.href = `reservation.html?id=${id}&edit=true`;
+                    });
+                });
+                
+                document.querySelectorAll('.cancel-reservation').forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const id = this.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to cancel this reservation?')) {
+                            try {
+                                await ApiService.cancelReservation(id);
+                                showToast('Reservation cancelled successfully');
+                                // Reload reservations
+                                loadUpcomingReservations();
+                            } catch (error) {
+                                showToast(error.message || 'Failed to cancel reservation');
+                            }
+                        }
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading reservations:', error);
+                document.getElementById('upcomingReservationsCount').textContent = '0';
+                document.getElementById('upcomingReservationsTable').innerHTML = 
+                    '<tr><td colspan="7" class="text-center">Error loading reservations</td></tr>';
+            }
+        }
+        
+        // Load recent orders
+        async function loadRecentOrders() {
+            try {
+                // Get recent orders from API
+                const orders = await ApiService.getOrders();
+                
+                // Update count
+                document.getElementById('ordersPlacedCount').textContent = orders.length;
+                
+                // Update table
+                const tableBody = document.getElementById('recentOrdersTable');
+                
+                if (orders.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="6" class="text-center">No orders yet</td></tr>';
+                    return;
+                }
+                
+                // Sort by date (newest first)
+                orders.sort((a, b) => new Date(b.order_date) - new Date(a.order_date));
+                
+                // Take only the first 3
+                const recentOrders = orders.slice(0, 3);
+                
+                // Generate table rows
+                tableBody.innerHTML = recentOrders.map(order => {
+                    const date = new Date(order.order_date);
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    
+                    // Format items
+                    const itemNames = order.items.map(item => item.name);
+                    const itemsText = itemNames.length > 2 
+                        ? `${itemNames.slice(0, 2).join(', ')} and ${itemNames.length - 2} more`
+                        : itemNames.join(', ');
+                    
+                    return `
+                        <tr>
+                            <td>#${order.id}</td>
+                            <td>${formattedDate}<br><small>${date.toLocaleTimeString()}</small></td>
+                            <td>${itemsText}</td>
+                            <td>${order.total_amount.toFixed(2)}</td>
+                            <td><span class="status-badge ${order.status}">${order.status}</span></td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn-icon view-order" data-id="${order.id}" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    ${order.status === 'completed' ? 
+                                      `<button class="btn-icon reorder" data-id="${order.id}" title="Reorder">
+                                          <i class="fas fa-redo"></i>
+                                       </button>` : 
+                                      order.status !== 'cancelled' ? 
+                                      `<button class="btn-icon cancel-order" data-id="${order.id}" title="Cancel Order">
+                                          <i class="fas fa-times"></i>
+                                       </button>` : ''}
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.view-order').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        window.location.href = `orders.html?id=${id}`;
+                    });
+                });
+                
+                document.querySelectorAll('.reorder').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        showToast('Reordering functionality coming soon!');
+                    });
+                });
+                
+                document.querySelectorAll('.cancel-order').forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const id = this.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to cancel this order?')) {
+                            try {
+                                await ApiService.cancelOrder(id);
+                                showToast('Order cancelled successfully');
+                                // Reload orders
+                                loadRecentOrders();
+                            } catch (error) {
+                                showToast(error.message || 'Failed to cancel order');
+                            }
+                        }
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('ordersPlacedCount').textContent = '0';
+                document.getElementById('recentOrdersTable').innerHTML = 
+                    '<tr><td colspan="6" class="text-center">Error loading orders</td></tr>';
+            }
+        }
+        
+        // Toast notification function
+        function showToast(message) {
+            // Check if toast container exists
+            let toastContainer = document.querySelector('.toast-container');
+            
+            if (!toastContainer) {
+                // Create container if it doesn't exist
+                toastContainer = document.createElement('div');
+                toastContainer.className = 'toast-container';
+                document.body.appendChild(toastContainer);
+            }
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            // Add to container
+            toastContainer.appendChild(toast);
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

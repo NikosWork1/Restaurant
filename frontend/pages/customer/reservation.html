@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations - Restaurant Management System</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/reservation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <h1>RMS</h1>
+                <p>Restaurant Management</p>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <img src="../../assets/images/user-avatar.jpg" alt="User Avatar" class="placeholder-img">
+            </div>
+            <div class="user-info">
+                <h3>John Doe</h3>
+                <p>Customer</p>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="menu.html">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="reservation.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Reservations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="orders.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>My Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profile.html">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-divider"></li>
+                <li>
+                    <a href="../auth/login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search reservations...">
+            </div>
+            
+            <div class="navbar-right">
+                <div class="notification-bell">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <a href="#">Mark all as read</a>
+                        </div>
+                        <div class="notification-body">
+                            <div class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Your reservation for tonight has been confirmed.</p>
+                                    <span class="notification-time">10 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Your order #1234 is ready for pickup.</p>
+                                    <span class="notification-time">30 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <div class="notification-icon">
+                                    <i class="fas fa-percent"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Special discount: 20% off on your next visit!</p>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#">View all notifications</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                
+                <div class="user-dropdown">
+                    <div class="user-avatar-small">
+                        <img src="../../assets/images/user-avatar.jpg" alt="User Avatar" class="placeholder-img">
+                    </div>
+                    <span class="user-name">John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                    
+                    <div class="user-dropdown-menu">
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help Center</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="../auth/login.html">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Page Content -->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>Reservations</h1>
+                <p>Book a table or manage your existing reservations</p>
+            </div>
+            
+            <!-- Reservation Actions -->
+            <div class="res-actions">
+                <button class="btn btn-primary" id="newReservationBtn">
+                    <i class="fas fa-plus"></i> New Reservation
+                </button>
+                
+                <div class="res-filters">
+                    <button class="res-filter-btn active" data-filter="all">All</button>
+                    <button class="res-filter-btn" data-filter="upcoming">Upcoming</button>
+                    <button class="res-filter-btn" data-filter="past">Past</button>
+                    <button class="res-filter-btn" data-filter="cancelled">Cancelled</button>
+                </div>
+            </div>
+            
+            <!-- Reservations List -->
+            <div class="content-card reservations-list">
+                <div class="card-header">
+                    <h2>My Reservations</h2>
+                    <div class="card-tools">
+                        <div class="date-filter">
+                            <label for="dateFilter">Filter by Date:</label>
+                            <input type="date" id="dateFilter">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Reservation ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Guests</th>
+                                <th>Table</th>
+                                <th>Special Requests</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="upcoming-row">
+                                <td>#RES-2025042601</td>
+                                <td>May 1, 2025</td>
+                                <td>7:30 PM</td>
+                                <td>4</td>
+                                <td>T12 (Window)</td>
+                                <td>Birthday celebration</td>
+                                <td><span class="status-badge confirmed">Confirmed</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Cancel">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="upcoming-row">
+                                <td>#RES-2025042705</td>
+                                <td>May 15, 2025</td>
+                                <td>6:00 PM</td>
+                                <td>2</td>
+                                <td>T08 (Patio)</td>
+                                <td>Anniversary dinner</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Cancel">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="past-row">
+                                <td>#RES-2025041201</td>
+                                <td>April 12, 2025</td>
+                                <td>8:00 PM</td>
+                                <td>6</td>
+                                <td>T15 (Private)</td>
+                                <td>None</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Book Again">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="cancelled-row">
+                                <td>#RES-2025040501</td>
+                                <td>April 5, 2025</td>
+                                <td>7:00 PM</td>
+                                <td>3</td>
+                                <td>T06 (Window)</td>
+                                <td>None</td>
+                                <td><span class="status-badge cancelled">Cancelled</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="Book Again">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Restaurant Layout Section -->
+            <div class="content-card restaurant-layout">
+                <div class="card-header">
+                    <h2>Restaurant Layout</h2>
+                    <div class="card-tools">
+                        <select id="layoutDateSelector" class="form-select">
+                            <option>Today (April 29, 2025)</option>
+                            <option>Tomorrow (April 30, 2025)</option>
+                            <option>May 1, 2025</option>
+                            <option>May 2, 2025</option>
+                            <option>May 3, 2025</option>
+                        </select>
+                        <select id="layoutTimeSelector" class="form-select">
+                            <option>5:00 PM</option>
+                            <option>6:00 PM</option>
+                            <option>7:00 PM</option>
+                            <option>8:00 PM</option>
+                            <option>9:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="layout-container">
+                        <!-- Floor Plan will be drawn here using JavaScript -->
+                        <div class="floor-plan">
+                            <div class="table-legend">
+                                <div class="legend-item">
+                                    <span class="table-status available"></span>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="table-status reserved"></span>
+                                    <span>Reserved</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="table-status occupied"></span>
+                                    <span>Occupied</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="table-status selected"></span>
+                                    <span>Selected</span>
+                                </div>
+                            </div>
+                            
+                            <div class="restaurant-map">
+                                <!-- Window area -->
+                                <div class="restaurant-section window-section">
+                                    <div class="section-label">Window Area</div>
+                                    <div class="tables-container">
+                                        <div class="table table-round available" data-table="T1" data-seats="2">
+                                            <span class="table-number">T1</span>
+                                            <span class="table-seats">2</span>
+                                        </div>
+                                        <div class="table table-round reserved" data-table="T2" data-seats="2">
+                                            <span class="table-number">T2</span>
+                                            <span class="table-seats">2</span>
+                                        </div>
+                                        <div class="table table-rectangle available" data-table="T3" data-seats="4">
+                                            <span class="table-number">T3</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                        <div class="table table-rectangle occupied" data-table="T4" data-seats="4">
+                                            <span class="table-number">T4</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Center area -->
+                                <div class="restaurant-section center-section">
+                                    <div class="section-label">Center Area</div>
+                                    <div class="tables-container">
+                                        <div class="table table-round available" data-table="T5" data-seats="2">
+                                            <span class="table-number">T5</span>
+                                            <span class="table-seats">2</span>
+                                        </div>
+                                        <div class="table table-round available" data-table="T6" data-seats="2">
+                                            <span class="table-number">T6</span>
+                                            <span class="table-seats">2</span>
+                                        </div>
+                                        <div class="table table-square available" data-table="T7" data-seats="4">
+                                            <span class="table-number">T7</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                        <div class="table table-square reserved" data-table="T8" data-seats="4">
+                                            <span class="table-number">T8</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                        <div class="table table-rectangle available" data-table="T9" data-seats="6">
+                                            <span class="table-number">T9</span>
+                                            <span class="table-seats">6</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Private area -->
+                                <div class="restaurant-section private-section">
+                                    <div class="section-label">Private Area</div>
+                                    <div class="tables-container">
+                                        <div class="table table-long available" data-table="T10" data-seats="8">
+                                            <span class="table-number">T10</span>
+                                            <span class="table-seats">8</span>
+                                        </div>
+                                        <div class="table table-round occupied" data-table="T11" data-seats="4">
+                                            <span class="table-number">T11</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Patio area -->
+                                <div class="restaurant-section patio-section">
+                                    <div class="section-label">Patio</div>
+                                    <div class="tables-container">
+                                        <div class="table table-round available" data-table="P1" data-seats="2">
+                                            <span class="table-number">P1</span>
+                                            <span class="table-seats">2</span>
+                                        </div>
+                                        <div class="table table-round available" data-table="P2" data-seats="2">
+                                            <span class="table-number">P2</span>
+                                            <span class="table-seats">2</span>
+                                        </div>
+                                        <div class="table table-square available" data-table="P3" data-seats="4">
+                                            <span class="table-number">P3</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                        <div class="table table-square reserved" data-table="P4" data-seats="4">
+                                            <span class="table-number">P4</span>
+                                            <span class="table-seats">4</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reservation Modal -->
+        <div class="modal" id="reservationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Make a Reservation</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="resDate">Date</label>
+                            <input type="date" id="resDate" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resTime">Time</label>
+                            <select id="resTime" name="time" required>
+                                <option value="">Select Time</option>
+                                <option>5:00 PM</option>
+                                <option>5:30 PM</option>
+                                <option>6:00 PM</option>
+                                <option>6:30 PM</option>
+                                <option>7:00 PM</option>
+                                <option>7:30 PM</option>
+                                <option>8:00 PM</option>
+                                <option>8:30 PM</option>
+                                <option>9:00 PM</option>
+                                <option>9:30 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resGuests">Number of Guests</label>
+                            <select id="resGuests" name="guests" required>
+                                <option value="">Select Guests</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option value="more">More than 10</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resSection">Preferred Section</label>
+                            <select id="resSection" name="section">
+                                <option value="">No Preference</option>
+                                <option>Window</option>
+                                <option>Center</option>
+                                <option>Private</option>
+                                <option>Patio</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resTable">Selected Table</label>
+                            <input type="text" id="resTable" name="table" readonly>
+                            <small>Select a table from the floor plan or leave empty for automatic assignment</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resOccasion">Special Occasion</label>
+                            <select id="resOccasion" name="occasion">
+                                <option value="">None</option>
+                                <option>Birthday</option>
+                                <option>Anniversary</option>
+                                <option>Business Meeting</option>
+                                <option>Date Night</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resRequests">Special Requests</label>
+                            <textarea id="resRequests" name="requests" rows="3" placeholder="Any specific requests or accommodations?"></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" id="cancelReservationBtn">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Restaurant Management System. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    
+    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/reservation.js"></script>
+</body>
+</html>
